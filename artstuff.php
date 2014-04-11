@@ -8,8 +8,9 @@
 </div>
 
 <div id="content">
-  <div class="intro">I might do some comics here, maybe? It's pretty unlikely. Only time will tell, I supose.<br/>
-  
-</div>
+  <div class="intro">I might do some comics here, maybe? It's pretty unlikely. Only time will tell, I suppose.<br/>
+  Speaking of which... the Facebook share button only shares the generic Facebook page, as I haven't applied for an app ID yet. <br/>
+  I will re-organize things once I have more content to post...
+  </div>
 
 </div>

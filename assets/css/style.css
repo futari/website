@@ -27,7 +27,7 @@ body {
   text-align: right;
   list-style-type: none;
   display: inline-block;
-  border-right: 1px solid #d12e2f;
+  border-right: 1px solid #ffffff;
   vertical-align: top;
   position: relative;
 }
@@ -42,7 +42,7 @@ body {
   text-decoration: none;
   padding: 20px 10px 0px 60px;
   font-size: 24px;
-  color: #d12e2f;
+  color: #ffffff;
 }
 
 /* characters */
@@ -69,10 +69,21 @@ body {
   margin-left: 40px;  
 }
 
-#tree_project .left {
+#project-content {
+  overflow: scroll;
+  height: 650px;
+}
+
+#project-content .left {
   width: 600px;
   display: inline-block;
-  margin: 0px 40px 0px 20px;
+  margin: 20px 90px 30px 20px;
+  vertical-align: top;
+}
+
+#project-content .right {
+  position: relative;
+  display: inline-block;
 }
 
 #footer {
