@@ -1,25 +1,25 @@
-<div class="menu">
-  <img src="./assets/imgs/monoden-large.png" style="float: right; padding: 20px;">
-  <ul>
-    <li>
-      <a href="#artstuff">artstuff</a>
+<div class="menu_container">
+  <ul class="menu">
+    <li> <!-- About -->
+      <a href="#about">ABOUT</a>
     </li>
-    <li>
-      <a href="#codestuff">codestuff</a>
+    <li> <!-- Code -->
+      <a href="#codestuff">CODE</a>
+      <div class="submenu codestuff">
+        <div class="hover_text"></div>
+        <ul>
+          <li><a href="tree_circle"></a></li>
+          <li><a href="geometry_game"></a></li>
+        </ul>
+      </div>
     </li>
-    <li>
-      <a href="#characters">characters</a>
+    <li> <!-- Resume -->
+      <a href="#resume">RESUME</a>
     </li>
   </ul>
-  
+  <ul class="button_list">
+    <li><a class="word" href="./assets/resume.doc"></a></li>
+    <li><a class="linkedin" href="http://www.linkedin.com/in/erickaoyvr"></a></li>
+    <li><a class="github" href="https://github.com/futari/"></a></li>
+  </ul>
 </div>
-<!--<div class="submenu">
-  <ul class="codestuff">
-    <li><a href="#cpp">c++</a></li>
-    <li><a href="#java">java</a></li>
-    <li><a href="#webstuff">webstuff</a></li>
-  </ul>
-  <ul class="characters">
-    <li><a href="#rmp">richard michael philips</a></li>
-  </ul>
-</div>-->
