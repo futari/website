@@ -2,7 +2,7 @@
   $('#header').load('./header.php', function() {
     var $header = $(this);
   
-    $('.menu > li', $header).animate({opacity: 1}, 800);
+    $('.menu > li', $header).animate({opacity: 1}, 400);
 
     $('.menu > li > a', $header).hover(function() {
       var $this = $(this);
@@ -15,9 +15,10 @@
     var menu_click = function(href) {
       // clicks on the header menu, does animation and loads page in container
       $('.submenu').fadeOut();
-      $('.menu', $header).animate({top: "0%"}, 600, function() {
+      $('.menu', $header).animate({top: "0%", opacity: 0}, 600, function() {
         var $this = $(this);
-        $this.animate({padding: "0px"}, 800);
+        $this.css('text-align', 'left').css('padding-left', '100px');
+        $this.animate({padding: "0px", opacity: 1}, 600);
         
         $('li', $this).animate({margin: "0px"}, 800, function() {
           $('.button_list').fadeIn(800);

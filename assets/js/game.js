@@ -65,15 +65,12 @@ var gameInit = function() {
       x: 100, y: blockY, w: 16, h: 16, vy: 0,
       job: {
         loc: 'Burnaby, BC',
-        year: '2013',
+        year: '2013, January - May',
         company: 'Spraybuilt',
         position: 'Developer (Contractor)',
         duties: [
-        "Increased community involvement by implementing on Wordpress.",
-        "Implemented design and features to increase product usability.",
-        "Improved marketing team's productivity by implementing new features.",
-        "Worked on quality assurance through writing automation tests in Selenium.",
-        "Used Pivotal and Github to manage product features, code reviews and product backlogs in an organized manner."
+          "Created web app templates to client's specification.",
+          "Integrated templates to the back-end database."
         ]
       }
     },
@@ -81,15 +78,12 @@ var gameInit = function() {
       x: 200, y: blockY, w: 16, h: 16, vy: 0,
       job: {
         loc: 'Victoria, BC',
-        year: '2013',
+        year: '2013, January - April',
         company: 'IBM',
-        position: 'Engineering Intern',
+        position: 'Software Developer (Co-op)',
         duties: [
-        "Increased community involvement by implementing on Wordpress.",
-        "Implemented design and features to increase product usability.",
-        "Improved marketing team's productivity by implementing new features.",
-        "Worked on quality assurance through writing automation tests in Selenium.",
-        "Used Pivotal and Github to manage product features, code reviews and product backlogs in an organized manner."
+          "Developed features for IBM's Forms Classic Designer software.",
+          "Improved the software's quality by fixing bugs and reporting issues."
         ]
       }
     },
@@ -97,31 +91,29 @@ var gameInit = function() {
       x: 400, y: blockY, w: 16, h: 16, vy: 0,
       job: {
         loc: 'San Francisco, CA',
-        year: '2012',
+        year: '2012, February - August',
         company: 'PlayHaven',
         position: 'Engineering Intern',
         duties: [
-        "Increased community involvement by implementing on Wordpress.",
-        "Implemented design and features to increase product usability.",
-        "Improved marketing team's productivity by implementing new features.",
-        "Worked on quality assurance through writing automation tests in Selenium.",
-        "Used Pivotal and Github to manage product features, code reviews and product backlogs in an organized manner."
+          "Increased community involvement by implementing on Wordpress.",
+          "Implemented design and features to increase product usability.",
+          "Improved marketing team's productivity by implementing new features.",
+          "Worked on quality assurance through writing automation tests in Selenium.",
+          "Used Pivotal and Github to manage product features, code reviews and product backlogs in an organized manner."
         ]
       }
     },
     {
-      x: 800, y: blockY, w: 16, h: 16, vy: 0,
+      x: 600, y: blockY, w: 16, h: 16, vy: 0,
       job: {
         loc: 'Vancouver, BC',
-        year: '2011',
+        year: '2011, May - August',
         company: 'HireTheWorld',
         position: 'Junior Developer',
         duties: [
-        "Increased community involvement by implementing on Wordpress.",
-        "Implemented design and features to increase product usability.",
-        "Improved marketing team's productivity by implementing new features.",
-        "Worked on quality assurance through writing automation tests in Selenium.",
-        "Used Pivotal and Github to manage product features, code reviews and product backlogs in an organized manner."
+          "Participated in feature specification and planning.",
+          "Implemented both front-end and back-end features using CodeIgniter.",
+          "Improved feature usability and overall customer satisfaction."
         ]
       }
     }
@@ -144,7 +136,6 @@ var gameInit = function() {
         if (!player.freeze && !player.moveRight && !player.moveLeft) {
           player.moveLeft = true;
           if (!player.jumping)
-            player.faceRight = false;
             player.state = player.walk;
             player.animWalk.timer = 0;
             player.walking = true;
@@ -163,7 +154,6 @@ var gameInit = function() {
         if (!player.freeze && !player.moveRight && !player.moveLeft) {
           player.moveRight = true;
           if (!player.jumping)
-            player.faceRight = true;
             player.state = player.walk;
             player.animWalk.timer = 0;
             player.walking = true;
@@ -247,22 +237,29 @@ var gameInit = function() {
     if (player.moveRight) {
       player.vx++;
       if (player.vx > 2)  player.vx = 2;
+      player.state = player.walk;
+      player.walking = true;
+      player.faceRight = true;
     }
     if (player.moveLeft) {
       player.vx--;
       if (player.vx < -2)  player.vx = -2;
+      player.state = player.walk;
+      player.walking = true;
+      player.faceRight = false;
     }
     
-    player.x += player.vx * dt;
-    if (player.y + player.state.left.h < groundY && player.vy >= 0)
+    if (player.y + player.state.left.h < groundY && player.vy >= 0) {
       player.state = player.fall;
-    else
-      player.state = player.idle;
-  
+    }
     if (player.y + player.state.left.h < groundY) {
       player.vy += gravity * dt;
     }
+    
+    player.x += player.vx * dt;
     player.y += player.vy * dt;
+    
+    // landing
     if (player.y + player.state.left.h >= groundY) {
       player.y = groundY - player.state.left.h;
       player.vy = 0;
@@ -280,6 +277,7 @@ var gameInit = function() {
     if (player.faceRight)
       p = player.state.right;
     
+    // borders
     if (player.x < 0) {
       player.x = 0;
     }
@@ -287,8 +285,16 @@ var gameInit = function() {
       player.x = w - p.w;
     }
         
-    $.each(blocks, function(i, b) {
-      if (player.x + p.w >= b.x && player.x <= b.x + b.w) {
+    $.each(blocks, function(i, b) {   
+      if (player.x + p.w - 2 >= b.x && player.x <= b.x + b.w - 2) {
+        // top collision
+        if (player.y + p.h >= b.y && player.y + p.h <= b.y + b.h) {
+          player.y = b.y - p.h;
+          player.vy = 0;
+          player.jumping = false;
+          player.state = player.idle;
+        }
+      } else if (player.x + p.w >= b.x && player.x <= b.x + b.w) {
         // bottom collision
         if (player.y > b.y && player.y <= b.y + b.h) {
           player.y = b.y + b.h + 1;
@@ -297,13 +303,6 @@ var gameInit = function() {
           player.state = player.fall;
           b.vy -= 5;
           popup(b.job);
-        }
-        // top collision
-        else if (player.y + p.h >= b.y && player.y + p.h <= b.y + b.h) {
-          player.y = b.y - p.h;
-          player.vy = 0;
-          player.jumping = false;
-          player.state = player.idle;
         }
       }
     });

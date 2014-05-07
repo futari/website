@@ -2,9 +2,8 @@
   gameInit();
 </script>
 
-
 <div>
-  Use the arrow keys to move Luigi and hit the ? Blocks!
+  Use the arrow keys to move Luigi and hit the "?" blocks!
 </div>
 
 <div id="gameContainer">
